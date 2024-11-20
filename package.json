@@ -1,0 +1,25 @@
+{
+  "name": "threads-app-backend-graphql",
+  "version": "1.0.0",
+  "description": "Backend for Threads App using GraphQL API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Farooq85-dev/Threads-App-Backend-GraphQL.git"
+  },
+  "keywords": [
+    "graph-ql",
+    "express-js",
+    "node-js",
+    "javascript"
+  ],
+  "author": "Muhammad Farooq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Farooq85-dev/Threads-App-Backend-GraphQL/issues"
+  },
+  "homepage": "https://github.com/Farooq85-dev/Threads-App-Backend-GraphQL#readme"
+}
