@@ -5,55 +5,10 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
 import { prismaClient } from "./lib/db";
+import createApolloGraphqlServer from "./graphql";
 
 // Load environment variables
 dotenv.config({ path: "./.env" });
-
-// Define schema
-const typeDefs = `
-  type Query {
-    hello: String,
-  }
-
-  type Mutation {  # The mutation type
-    createUser(firstName: String!, lastName: String, email: String, password: String): Boolean
-  }
-`;
-
-// Define resolvers
-const resolvers = {
-  Query: {
-    hello: () => "Hello, I am a GraphQl Server!!!",
-  },
-
-  Mutation: {
-    createUser: async (
-      _parent: any,
-      {
-        firstName,
-        lastName,
-        email,
-        password,
-      }: {
-        firstName: string;
-        lastName: string;
-        email: string;
-        password: string;
-      }
-    ) => {
-      await prismaClient.user.create({
-        data: {
-          firstName,
-          lastName,
-          email,
-          password,
-          salt: "random_salt",
-        },
-      });
-      return true;
-    },
-  },
-};
 
 // Create GraphQL Server
 const startServer = async () => {
@@ -62,12 +17,7 @@ const startServer = async () => {
   app.use(cors());
   app.use(morgan("dev"));
 
-  const gqlServer = new ApolloServer({
-    typeDefs,
-    resolvers,
-  });
-
-  await gqlServer.start();
+  const gqlServer = await createApolloGraphqlServer();
 
   const PORT = process.env?.PORT || 3500;
   const path: string = "/graphql";
