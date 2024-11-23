@@ -1,1 +1,1 @@
-export const queries = ``;
+export const queries = `getUserToken(email:String!, password:String!):String`;
